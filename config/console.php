@@ -22,6 +22,11 @@ $config = [
         ],
         'db' => $db,
     ],
+    'modules' => [
+	     'parser' => [
+		      'class' => 'app\modules\parser\Parser',
+	     ],
+    ],
     'params' => $params,
     /*
     'controllerMap' => [

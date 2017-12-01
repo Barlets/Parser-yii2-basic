@@ -3,7 +3,7 @@
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `product`.
+ * Handles the creation of table `parser`.
  */
 class m171130_113326_create_product_table extends Migration
 {
@@ -12,7 +12,7 @@ class m171130_113326_create_product_table extends Migration
      */
 	public function up()
 	{
-		$this->createTable('product', [
+		$this->createTable('parser', [
 			 'id'       => $this->primaryKey(),
 			 'name'     => $this->string(),
 			 'img'      => $this->string(),
@@ -28,6 +28,6 @@ class m171130_113326_create_product_table extends Migration
      */
     public function down()
     {
-        $this->dropTable('product');
+        $this->dropTable('parser');
     }
 }
