@@ -3,14 +3,14 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-use app\assets\PublicAsset;
+use app\assets\ParserAsset;
 use app\widgets\Alert;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 
-PublicAsset::register($this);
+ParserAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -38,9 +38,9 @@ PublicAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-	         ['label' => 'Home', 'url' => ['default/index']],
-	         ['label' => 'List', 'url' => ['default/list']],
-	         ['label' => 'Parse', 'url' => ['default/parse']],
+	         ['label' => 'Home', 'url' => ['/parser/product/index']],
+	         ['label' => 'List', 'url' => ['/parser/product/list']],
+//	         ['label' => 'Parse', 'url' => ['/parser/product/parse']],
 //            Yii::$app->user->isGuest ? (
 //                ['label' => 'Login', 'url' => ['/site/login']]
 //            ) : (

@@ -1,13 +1,25 @@
 <?php
+
+namespace app\modules\parser\components\interfaces;
+
+interface ParserInterface
+{
+	function getParsingResult($url = '');
 	
-	namespace app\modules\parser\components\interfaces;
+	function getData();
 	
-	interface ParserInterface
-	{
-		/**
-		 * @param string $url
-		 * @return mixed
-		 */
-		public static function getParsingResult($url = '');
-		
-	}
+	function getSite();
+	
+	function getName($item);
+	
+	function getImg($item);
+	
+	function getPrice($item);
+	
+	function getLink($item);
+	
+	function getBaseUrl();
+	
+	function parse($pattern, $item);
+	
+}

@@ -1,9 +1,10 @@
 <?php
-
+$db = require __DIR__ . '/db-local.php';
+return $db;
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=testDB',
-    'username' => '',
+    'dsn' => 'mysql:host=localhost;dbname=yii2basic',
+    'username' => 'root',
     'password' => '',
     'charset' => 'utf8',
 

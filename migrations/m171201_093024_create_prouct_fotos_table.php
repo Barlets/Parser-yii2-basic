@@ -3,16 +3,16 @@
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `parser`.
+ * Handles the creation of table `prouct_fotos`.
  */
-class m171130_113326_create_product_table extends Migration
+class m171201_093024_create_prouct_fotos_table extends Migration
 {
-    /**
-     * @inheritdoc
-     */
+	/**
+	 * @inheritdoc
+	 */
 	public function up()
 	{
-		$this->createTable('parser', [
+		$this->createTable('prouct_fotos', [
 			 'id'       => $this->primaryKey(),
 			 'name'     => $this->string(),
 			 'img'      => $this->string(),
@@ -22,12 +22,12 @@ class m171130_113326_create_product_table extends Migration
 			 'date'     => $this->date()
 		]);
 	}
-
-    /**
-     * @inheritdoc
-     */
-    public function down()
-    {
-        $this->dropTable('parser');
-    }
+	
+	/**
+	 * @inheritdoc
+	 */
+	public function down()
+	{
+		$this->dropTable('prouct_fotos');
+	}
 }
