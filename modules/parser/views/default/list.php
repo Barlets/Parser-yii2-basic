@@ -5,7 +5,7 @@
 ?>
 
 <h2>Результаты парсинга:</h2>
-<p><?=Html::a('Удалить все результаты', ['default/delete-all']) ?></p>
+<p><?=Html::a('Удалить все результаты', ['default/delete']) ?></p>
 <table class="table table-hover">
 	<thead>
 	<tr>

@@ -15,8 +15,6 @@ class Parser extends Module implements BootstrapInterface
 	public $params = [];
 	public $modules;
 	public $layout = '/parser';
-	public $controllerNamespace = 'app\modules\parser\controllers';
-	
 	
 	public function init()
 	{
@@ -33,7 +31,7 @@ class Parser extends Module implements BootstrapInterface
 	public function bootstrap($app)
 	{
 		if ($app instanceof Yii\console\Application) {
-			$this->controllerNamespace = 'app\modules\parser\commands';
+			$this->controllerNamespace = 'app\modules\parser\controllers\console';
 		}
 	}
 	

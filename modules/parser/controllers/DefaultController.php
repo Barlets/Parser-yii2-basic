@@ -2,16 +2,13 @@
 
 namespace app\modules\parser\controllers;
 
-use app\modules\parser\components\managers\ParserManager;
-use app\modules\parser\components\managers\ProductManager;
+use app\modules\parser\components\actions\DeleteAction;
+use app\modules\parser\components\actions\ParseAction;
 use app\modules\parser\models\Product;
 use yii\web\Controller;
-use yii;
-
 
 class DefaultController extends Controller
 {
-	private $url = 'https://enko.com.ua/shop/telefoniya/mobilnye-telefony/';
 	
 	public function actionIndex()
 	{
@@ -29,32 +26,15 @@ class DefaultController extends Controller
 	
 	public function actionParse()
 	{
-		$parser = new ParserManager();
-		$parsingResults = $parser->getParsingResult($this->url);
-		
-		if (empty($parsingResults) || !is_array($parsingResults)) {
-			Yii::$app->errorHandler->exception;
-			return false;
-		} else {
-			$productManager = new ProductManager();
-			$productManager->findIdenticalNames($parsingResults, true);
-			
-			foreach ($parsingResults as $productItem) {
-				$product = new Product();
-				$product->load(['Product' => $productItem]);
-				$product->save();
-			}
-		}
+		new ParseAction();
 		
 		return $this->redirect('list');
 	}
 	
-	
-	public function actionDeleteAll()
+	public function actionDelete()
 	{
-		Product::deleteAll();
+		new DeleteAction();
 		
 		return $this->redirect('list');
 	}
-	
 }
