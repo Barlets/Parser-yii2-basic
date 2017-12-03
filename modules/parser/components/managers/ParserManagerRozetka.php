@@ -4,24 +4,28 @@ namespace app\modules\parser\components\managers;
 
 use app\modules\parser\components\interfaces\ParserInterface;
 use app\modules\parser\models\Curl;
+use phpQuery;
 
-
-class ParserManager implements ParserInterface
+class ParserManagerRozetka implements ParserInterface
 {
 	private $url;
 	private $products = [];
-
-	public function getParsingResult($url = '')
+	
+	function getParsingResult($url = '')
 	{
 		$this->url = $url;
+		
+		
 		$this->getData();
-		return $this->products;
+		return ($this->products);
 	}
 	
-	public function getData()
+	function getData()
 	{
 		$product = [];
-		foreach ($this->getSite() as $item) {
+		
+		foreach ($this->getSite()->find('.g-i-tile-l > .g-i-tile.g-i-tile-catalog') as $item) {
+			
 			$product['name'] = $this->getName($item);
 			$product['img'] = $this->getImg($item);
 			$product['link'] = $this->getLink($item);
@@ -34,34 +38,32 @@ class ParserManager implements ParserInterface
 	public function getSite()
 	{
 		$site = Curl::curl($this->url);
-		
-		$pattern = "/\<div[^\>]*class\=\"catalog_item\".*/";
-		preg_match_all($pattern, $site, $catalog_item);
-		return array_pop($catalog_item);
+		return phpQuery::newDocument($site);
 	}
 	
 	public function getName($item)
 	{
-		$pattern = '/class="cat_title".+?<h2\>(.+?)<\/h2>/';
-		return $this->parse($pattern, $item);
+		$item = pq($item);
+		return $item->find('.over-wraper a > img')->attr('alt');
 	}
 	
 	public function getImg($item)
 	{
-		$pattern = '/<img.+?src="(.+?)".+?/';
-		return $this->parse($pattern, $item);
-	}
-	
-	public function getPrice($item)
-	{
-		$pattern = '/class="iprice_c">(.+?)<\/span>/';
-		return $price_int = (int)preg_replace('/\s/', '', $this->parse($pattern, $item));
+		$item = pq($item);
+		return $item->find('.over-wraper a > img')->attr('src');
 	}
 	
 	public function getLink($item)
 	{
-		$pattern = '/<a.+?href="(.+?)".+?/';
-		return $this->parse($pattern, $item);
+		$item = pq($item);
+		return $item->find('.over-wraper a')->attr('href');
+	}
+	
+	public function getPrice($item)
+	{
+		$item = pq($item);
+		$item->find('.over-wraper .g-price-uah > span')->attr('id');
+		return 1;
 	}
 	
 	public function getBaseUrl()
@@ -76,5 +78,6 @@ class ParserManager implements ParserInterface
 		$result = array_pop($match);
 		return array_pop($result);
 	}
+	
 	
 }

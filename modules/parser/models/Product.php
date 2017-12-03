@@ -2,8 +2,6 @@
 
 namespace app\modules\parser\models;
 
-use yii\db\ActiveRecord;
-
 /**
  * This is the model class for table "product".
  * @property integer $id
@@ -14,8 +12,11 @@ use yii\db\ActiveRecord;
  * @property integer $price
  * @property string $date
  */
-class Product extends ActiveRecord
+class Product extends \yii\db\ActiveRecord
 {
+	/**
+	 * @inheritdoc
+	 */
 	public static function tableName()
 	{
 		return 'product';
@@ -28,12 +29,13 @@ class Product extends ActiveRecord
 	{
 		return [
 			 [['name', 'img', 'link', 'price'], 'required'],
-			 [['name', 'img', 'link', 'base_url'], 'string'],
+			 [['name', 'img', 'link', 'base_url'], 'string', 'max' => 255],
 			 [['price'], 'integer'],
 			 [['date'], 'date', 'format' => 'php:Y-m-d'],
 			 [['date'], 'default', 'value' => date('Y-m-d')],
 		];
 	}
+	
 	
 	/**
 	 * @inheritdoc
@@ -42,13 +44,12 @@ class Product extends ActiveRecord
 	{
 		return [
 			 'id'       => 'ID',
-			 'name'     => 'Product Name',
-			 'img'      => 'Product Image',
-			 'link'     => 'Product Link',
-			 'base_url' => 'Base URL',
-			 'price'    => 'Product Price',
-			 'date'     => 'Date'
+			 'name'     => 'Имя',
+			 'img'      => 'Изображение',
+			 'link'     => 'Ссылка',
+			 'base_url' => 'Base Url',
+			 'price'    => 'Цена',
+			 'date'     => 'Дата',
 		];
 	}
-	
 }

@@ -2,30 +2,30 @@
 
 namespace app\modules\parser\components\actions;
 
-use app\modules\parser\components\managers\ParserManager;
-use app\modules\parser\components\managers\ParserManagerFotos;
+use app\modules\parser\components\managers\ParserManagerRozetka;
 use app\modules\parser\components\managers\ProductManager;
 use app\modules\parser\models\Product;
+use app\modules\parser\Parser;
 use Yii;
 use yii\base\Model;
 
 
 class ParseAction extends Model
 {
+	private $url = '';
+	private $request = '';
 	
-	private $url = 'https://enko.com.ua/shop/telefoniya/mobilnye-telefony/';
-	
-	public function init()
+	public function parse()
 	{
-		$parser_f = new ParserManagerFotos();
-		$parsingResults = $parser_f->getParsingResult();
-		var_dump($parser_f);
-		echo '---------';
-		var_dump($parsingResults);
-		die;
+		$config = Parser::getInstance()->params;
+		$this->url = $config['rozetka'] . $this->request;
 		
-		$parser = new ParserManager();
-		$parsingResults = $parser->getParsingResult($this->url);
+		$parser_r = new ParserManagerRozetka();
+		$parsingResults = $parser_r->getParsingResult($this->url);
+
+//		$parser = new ParserManagerEnko();
+//		$parsingResults = $parser->getParsingResult($this->url);
+		
 		
 		if (empty($parsingResults) || !is_array($parsingResults)) {
 			Yii::$app->errorHandler->exception;
@@ -38,11 +38,15 @@ class ParseAction extends Model
 				$product = new Product();
 				$product->load(['Product' => $productItem]);
 				$product->save();
-				
 			}
 			return true;
 		}
 		
+	}
+	
+	public function setRequest($request)
+	{
+		return $this->request = $request;
 	}
 	
 }

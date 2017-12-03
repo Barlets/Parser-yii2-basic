@@ -38,9 +38,9 @@ ParserAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-	         ['label' => 'Home', 'url' => ['default/index']],
-	         ['label' => 'List', 'url' => ['default/list']],
-	         ['label' => 'Parse', 'url' => ['default/parse']],
+	         ['label' => 'Home', 'url' => ['/parser/product/index']],
+	         ['label' => 'List', 'url' => ['/parser/product/list']],
+//	         ['label' => 'Parse', 'url' => ['/parser/product/parse']],
 //            Yii::$app->user->isGuest ? (
 //                ['label' => 'Login', 'url' => ['/site/login']]
 //            ) : (

@@ -2,13 +2,14 @@
 
 namespace app\modules\parser;
 
+
 use Yii;
 use yii\base\Application;
 use yii\base\BootstrapInterface;
 use yii\base\Module;
 
 /**
- * default module definition class
+ * parser module definition class
  */
 class Parser extends Module implements BootstrapInterface
 {
@@ -34,5 +35,4 @@ class Parser extends Module implements BootstrapInterface
 			$this->controllerNamespace = 'app\modules\parser\controllers\console';
 		}
 	}
-	
 }

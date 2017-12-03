@@ -66,7 +66,7 @@ class ProductManager extends ActiveRecord
 		return array_search(implode($result), $namesInDbHash);
 	}
 	
-	public function updateDuplicateRow($models)
+	public function updateDuplicateRow(array $models)
 	{
 		foreach ($models as $model) {
 			$model->update();
