@@ -3,7 +3,7 @@
 namespace app\modules\parser\controllers\console;
 
 use app\modules\parser\components\actions\DeleteAction;
-use app\modules\parser\components\actions\ParseAction;
+use app\modules\parser\components\actions\Parse;
 use yii\console\Controller;
 
 class ConsoleController extends Controller
@@ -16,7 +16,7 @@ class ConsoleController extends Controller
 	
 	public function actionParse()
 	{
-		$parse = new ParseAction();
+		$parse = new Parse();
 		if ($parse) {
 			echo 'Парсинг выполнен и результат сохранён в баз банных';
 			return 1;

@@ -1,16 +1,15 @@
 <?php
 
-namespace app\modules\parser\components\actions;
+namespace app\modules\parser\models;
 
 use app\modules\parser\components\managers\ParserManagerRozetka;
 use app\modules\parser\components\managers\ProductManager;
-use app\modules\parser\models\Product;
 use app\modules\parser\Parser;
 use Yii;
 use yii\base\Model;
 
 
-class ParseAction extends Model
+class Parse extends Model
 {
 	private $url = '';
 	private $request = '';

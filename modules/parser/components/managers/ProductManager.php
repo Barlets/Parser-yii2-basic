@@ -23,8 +23,8 @@ class ProductManager extends ActiveRecord
 	public function findIdenticalNames($parsingResults, $update)
 	{
 		$namesInDbHash = $this->getNamesHashFromDb();
+
 		$namesInParsed = $this->getNamesFromParsedSite($parsingResults);
-		
 		if ($update) {
 			return $this->findAndUpdateExistingRows($namesInDbHash, $namesInParsed);
 		}
@@ -34,7 +34,7 @@ class ProductManager extends ActiveRecord
 	{
 		foreach ($namesInParsed as $key => $value) {
 			$namesInParsedHash[$key] = md5($value);
-			
+
 			if (in_array($namesInParsedHash, $namesInDbHash)) {
 				return true;
 			} else {

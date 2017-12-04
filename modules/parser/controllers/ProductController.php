@@ -2,16 +2,15 @@
 
 namespace app\modules\parser\controllers;
 
-use app\modules\parser\models\RequestForm;
-use app\modules\parser\Parser;
+
 use Yii;
-use app\modules\parser\models\Product;
-use app\modules\parser\models\ProductSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use app\modules\parser\components\actions\DeleteAction;
-use app\modules\parser\components\actions\ParseAction;
+use app\modules\parser\models\Product;
+use app\modules\parser\models\ProductSearch;
+use app\modules\parser\models\Parse;
+use app\modules\parser\models\RequestForm;
 
 /**
  * ProductController implements the CRUD actions for Product model.
@@ -119,7 +118,7 @@ class ProductController extends Controller
 			$model->load(Yii::$app->request->post());
 			$request = $model->request;
 			
-			$parser = new ParseAction();
+			$parser = new Parse();
 			$parser->setRequest($request);
 			$parser->parse();
 			
@@ -154,7 +153,7 @@ class ProductController extends Controller
 	
 	public function actionParse()
 	{
-		$model = new ParseAction();
+		$model = new Parse();
 		$model->parse();
 		
 		return $this->redirect('list');
@@ -162,7 +161,7 @@ class ProductController extends Controller
 	
 	public function actionDeleteAll()
 	{
-		new DeleteAction();
+		Product::deleteAll();
 		
 		return $this->redirect('list');
 	}
