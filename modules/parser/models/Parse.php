@@ -24,7 +24,8 @@ class Parse extends Model
 
 //		$parser = new ParserManagerEnko();
 //		$parsingResults = $parser->getParsingResult($this->url);
-		
+
+
 		
 		if (empty($parsingResults) || !is_array($parsingResults)) {
 			Yii::$app->errorHandler->exception;
