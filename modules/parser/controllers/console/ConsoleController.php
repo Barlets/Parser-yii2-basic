@@ -2,8 +2,9 @@
 
 namespace app\modules\parser\controllers\console;
 
-use app\modules\parser\components\actions\DeleteAction;
-use app\modules\parser\components\actions\Parse;
+
+use app\modules\parser\models\Parse;
+use app\modules\parser\models\Product;
 use yii\console\Controller;
 
 class ConsoleController extends Controller
@@ -16,8 +17,8 @@ class ConsoleController extends Controller
 	
 	public function actionParse()
 	{
-		$parse = new Parse();
-		if ($parse) {
+		$model = new Parse();
+		if ($model->parse()) {
 			echo 'Парсинг выполнен и результат сохранён в баз банных';
 			return 1;
 		} else {
@@ -29,8 +30,7 @@ class ConsoleController extends Controller
 	
 	public function actionDelete()
 	{
-		$delete = new DeleteAction();
-		if ($delete) {
+		if (Product::deleteAll()) {
 			echo 'Данные успешно удалены';
 			return 1;
 		} else {
